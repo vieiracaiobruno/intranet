@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<nav class="mb-2" aria-label="breadcrumb">
+    <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="/">Youtube</a></li>
+        <li class="breadcrumb-item active">Video</li>
+    </ol>
+</nav>
+
+<div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white pt-2 border-y border-300">
+    <div id="channels" data-list='{"valueNames":["channel","title","published"],"page":10,"pagination":true}'>
+        <div class="table-responsive mx-n1 px-1 scrollbar">
+            <table class="table table-sm fs--1 mb-0">
+                <thead>
+                <tr>
+                    <th class="sort align-middle pe-5" scope="col" data-sort="channel" style="width:15%;">CHANNEL</th>
+                    <th class="sort align-middle pe-5" scope="col" data-sort="title" style="width:60%;">TITLE</th>
+                    <th class="sort align-middle pe-3" scope="col" data-sort="published" style="width:10%;">PUBLISHED</th>
+                    <th class="sort align-middle pe-3" scope="col" style="width:5%;">DETAIL</th>
+                    <th class="sort align-middle pe-5" scope="col" style="width:10%;">DISCARD</th>
+                </tr>
+                </thead>
+                <tbody class="list" id="table-latest-review-body">
+                    {% for video in video_list %}
+                    <tr class="hover-actions-trigger btn-reveal-trigger position-static">
+                        <td class="channel align-middle white-space-wrap text-1000 ps-1">{{ video.channel.title }}</td>
+                        <td class="title align-middle white-space-wrap text-1000 ps-1">{{ video.title }}</td>
+                        <td class="published align-middle white-space-nowrap text-1000 ps-1">{{ video.published|date:"d/m/Y" }}</td>
+                        <td class="align-middle white-space-nowrap text-1000 ps-3">
+                            <a href="{% url 'video-detail' video.id %}" class="nav-link-icon-inu label-1" role="button" data-bs-toggle="" aria-expanded="false">
+                                <span class="feather feather-list" data-feather="list" style="height: 16px; width: 16px;"></span>
+                            </a>
+                        </td>
+                        <td class="align-middle white-space-nowrap text-1000 ps-4">
+                            <a href="{% url 'video-discard' video.id %}" class="nav-link-icon-inu label-1" role="button" data-bs-toggle="" aria-expanded="false">
+                                <span class="feather feather-x-circle" data-feather="x-circle" style="height: 16px; width: 16px;"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="row align-items-center py-1">
+            <div class="pagination d-none"></div>
+            <div class="col d-flex fs--1">
+                <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info">1 to 6 <span class="text-600"> Items of </span>15</p><a class="fw-semi-bold" href="#!" data-list-view="*">View all<svg class="svg-inline--fa fa-angle-right ms-1" data-fa-transform="down-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg="" style="transform-origin: 0.25em 0.5625em;"><g transform="translate(128 256)"><g transform="translate(0, 32)  scale(1, 1)  rotate(0 0 0)"><path fill="currentColor" d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z" transform="translate(-128 -256)"></path></g></g></svg><!-- <span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span> Font Awesome fontawesome.com --></a><a class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less</a>
+            </div>
+            <div class="col-auto d-flex">
+                <button class="btn btn-link px-1 me-1 disabled" type="button" title="Previous" data-list-pagination="prev" disabled=""><svg class="svg-inline--fa fa-chevron-left me-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"></path></svg><!-- <span class="fas fa-chevron-left me-2"></span> Font Awesome fontawesome.com -->Previous</button><button class="btn btn-link px-1 ms-1" type="button" title="Next" data-list-pagination="next">Next<svg class="svg-inline--fa fa-chevron-right ms-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg><!-- <span class="fas fa-chevron-right ms-2"></span> Font Awesome fontawesome.com --></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,10 @@
+# Default ignored files
+shelf/
+.idea/
+certificates/
+core/migrations/*
+youtube/migrations/*
+db.sqlite3
+launcher.sh
+Pipfile
+Pipfile.lock
