@@ -1,7 +1,7 @@
 # Default ignored files
 shelf/
 .idea/
-certificates/
+certificates/*
 core/migrations/*
 youtube/migrations/*
 db.sqlite3
