@@ -143,6 +143,7 @@
   --phoenix-black-rgb: 0, 0, 0;
   --phoenix-body-color-rgb: 49, 55, 74;
   --phoenix-body-bg-rgb: 245, 247, 250;
+  --phoenix-orange: #F3854F;
   --phoenix-font-sans-serif: "Nunito Sans", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol";
@@ -6441,6 +6442,7 @@ textarea.form-control.is-invalid {
   --phoenix-breadcrumb-divider-color: #6e7891;
   --phoenix-breadcrumb-item-padding-x: 0.5rem;
   --phoenix-breadcrumb-item-active-color: var(--phoenix-gray-900);
+  --phoenix-breadcrumb-item-home-color: var(--phoenix-orange);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -6468,6 +6470,9 @@ textarea.form-control.is-invalid {
 }
 .breadcrumb-item.active {
   color: var(--phoenix-breadcrumb-item-active-color);
+}
+.breadcrumb-item.home {
+  color: var(--phoenix-breadcrumb-item-home-color);
 }
 .pagination {
   --phoenix-pagination-padding-x: 0.75rem;
@@ -22427,6 +22432,9 @@ pre[class*="language-"] {
 }
 .flatpickr-calendar.arrowBottom:before {
   border-top-color: var(--phoenix-border-color) !important;
+}
+.flatpickr-mobile:disabled,
+.flatpickr-mobile[readonly] {
 }
 .flatpickr-input:disabled,
 .flatpickr-input[readonly] {

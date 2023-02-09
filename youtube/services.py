@@ -59,23 +59,25 @@ def youtube_authenticated_service(client_secret):
 
     if credentials is None or credentials.invalid:
         credentials = run_flow(flow, storage)
-        print("3")
 
     return build('youtube', 'v3',
                  http=credentials.authorize(httplib2.Http()))
 
 
-def youtube_upload_video(video, upload_date):
+def youtube_upload_video(video, upload_date, original_video):
     year = int(upload_date[0:4])
     month = int(upload_date[5:7])
     day = int(upload_date[8:10])
     dt = datetime(year, month, day, 15, 0, 0, 0)
     iso_date = dt.isoformat()
 
+    description = 'Assista ao episódio completo aqui: https://www.youtube.com/watch?v=' + get_episode(video.description) + \
+                  '\n\n' + original_video.title
+
     request_body = {
         'snippet': {
             'title': title_adjustment(video.title) + ' [REUPLOAD]',
-            'description': 'Assista ao episódio completo aqui: https://www.youtube.com/watch?v=' + get_episode(video.description),
+            'description': description,
             'categoryId': video.category,
             'tags': [video.tags]
         },

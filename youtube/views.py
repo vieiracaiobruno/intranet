@@ -135,10 +135,10 @@ def video_detail_upload(request, id_video):
 def video_detail_upload(request, id_video):
     video = Video.objects.get(pk=id_video)
     upload_date = request.GET["uploadDate"]
-    original_video = request.GET["originalVideo"]     
+    original_video = Video.objects.get(pk=request.GET["originalVideo"])
     
     if download_video(video) and download_thumbnail(video):
-        status_video, response = youtube_upload_video(video, upload_date)
+        status_video, response = youtube_upload_video(video, upload_date, original_video)
         if status_video:
             status_thumbnail = thumbnail_upload(video, response)
             status_delete = delete_files(video)
@@ -147,7 +147,7 @@ def video_detail_upload(request, id_video):
                           '"uploaded_id": "' + response + '", ' \
                           '"status": "UP",' \
                           '"published": "' + upload_date + ' 09:00:00.000000",' \
-                          '"original_video": "' + original_video + '"' \
+                          '"original_video": "' + original_video.id + '"' \
                           '}'
             dict_fromjson = json.loads(json_string)
             form = VideoStatusForm(dict_fromjson)

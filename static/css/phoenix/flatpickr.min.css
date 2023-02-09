@@ -767,6 +767,9 @@ span.flatpickr-weekday {
 .flatpickr-input[readonly] {
   cursor: pointer;
 }
+.flatpickr-mobile[readonly] {
+  display: none;
+}
 @-webkit-keyframes fpFadeInDown {
   from {
     opacity: 0;
